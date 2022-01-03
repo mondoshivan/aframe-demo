@@ -1,0 +1,3 @@
+type AFRAME_DEMO_DATA_TYPE = {
+
+};
