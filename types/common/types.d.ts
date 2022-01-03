@@ -1,3 +1,3 @@
 type AFRAME_DEMO_DATA_TYPE = {
-
+    CUBES?: AFRAME_DEMO.IPoolData
 };

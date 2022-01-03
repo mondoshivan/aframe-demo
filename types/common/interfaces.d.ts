@@ -6,11 +6,31 @@ interface Window {
 
 declare namespace AFRAME_DEMO {
     interface IAttributeObject {
-        [key: string]: string|object
+        [key: string]: string|number|bool|object
+    }
+
+    interface IEntityData {
+        id?: string
+        components: IAttributeObject
+    }
+
+    interface IPrimitiveData extends IEntityData {
+        name: string
     }
 
     interface IObjectString {
         key: string
         value: string
+    }
+
+    interface IPoolDataComponent {
+        components: IAttributeObject
+    }
+
+    interface IPoolData {
+        [key: string]: {
+            components: IAttributeObject
+            poolSize: number
+        }
     }
 }

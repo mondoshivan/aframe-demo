@@ -6,7 +6,7 @@
   "directories": {},
   "scripts": {
     "test": "jest",
-    "dev": "npx webpack serve --config ./webpack.dev.js",
+    "dev": "npx webpack serve --https --config ./webpack.dev.js",
     "build": "webpack --config ./webpack.prod.js"
   },
   "keywords": [
