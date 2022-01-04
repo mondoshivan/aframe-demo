@@ -20,12 +20,10 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "AFRAME Typescript Demo",
+      template: 'src/index.html',
       favicon: "./static/favicon.ico",
-      meta: {
-        charset: "utf-8",
-        description: "AFRAME Typescript Demo",
-      }
+      inject: 'head',
+      scriptLoading: "blocking"
     })
   ],
 

@@ -1,22 +1,24 @@
 import * as AFRAME from "aframe";
 
-import { CubeSystem} from "@src/system/cube";
+import { CubeSystem } from "@src/system/cube";
 
 AFRAME.registerComponent('init-cube', {
     schema: {},
     init: function () {
         const el = this.el;
 
-        this.data.gltf = (el.sceneEl!.systems.cube as CubeSystem).getCube("gltf");
-        this.data.gltf.object3D.position.set(0, 0, -10);
-        this.data.gltf.play();
+        el.sceneEl!.addEventListener("loaded", () => {
+            this.data.gltf = (el.sceneEl!.systems.cube as CubeSystem).getCube("gltf");
+            this.data.gltf.object3D.position.set(0, 0, -10);
+            this.data.gltf.play();
 
-        // const cube = (el.sceneEl!.systems.cube as CubeSystem).getCube("simple");
-        // cube.object3D.position.set(-5, 0, -5);
-        // cube.play();
+            // const cube = (el.sceneEl!.systems.cube as CubeSystem).getCube("simple");
+            // cube.object3D.position.set(-5, 0, -5);
+            // cube.play();
 
-        this.data.cube = window.AFRAME_DEMO.CUBES!["gltf"];
-        this.data.cube.definition.init.call(this);
+            this.data.cube = window.AFRAME_DEMO.CUBES!["gltf"];
+            this.data.cube.definition.init.call(this);
+        })
     },
     update: function () {},
     tick: function (time, delta) {
