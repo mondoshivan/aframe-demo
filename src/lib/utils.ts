@@ -1,4 +1,4 @@
-import { AFrame, Entity } from "aframe";
+import { Entity, Scene } from "aframe";
 
 /**
  * 
@@ -70,6 +70,19 @@ export function createAssetItem(id: string, src: string) : HTMLElement {
 
 /**
  * 
+ * @param object 
+ */
+export function createAssetItems(object: AFRAME_DEMO.IAssetItem) {
+
+    for (const key in object) {
+
+        createAssetItem(key, object[key]); 
+
+    }
+}
+
+/**
+ * 
  * @param data 
  * @returns The primitive element.
  */
@@ -104,7 +117,7 @@ export function createEntity(data: AFRAME_DEMO.IEntityData) : HTMLElement {
  * @param scene 
  * @returns The scene element.
  */
-export function prepareScene(data: AFRAME_DEMO.IEntityData, scene: HTMLElement) : HTMLElement {
+export function prepareScene(data: AFRAME_DEMO.IEntityData, scene: Scene) : HTMLElement {
     return prepareEntity(data, scene);
 }
 
@@ -114,7 +127,7 @@ export function prepareScene(data: AFRAME_DEMO.IEntityData, scene: HTMLElement) 
  * @param entity 
  * @returns The entity element.
  */
-export function prepareEntity(data: AFRAME_DEMO.IEntityData, entity: HTMLElement) : HTMLElement {
+export function prepareEntity(data: AFRAME_DEMO.IEntityData, entity: Entity) : Entity {
     if (data.id) {
         const exists = document.getElementById(data.id);
         if (exists) throw new Error(`This ID already exists: ${data.id}`);
@@ -123,6 +136,7 @@ export function prepareEntity(data: AFRAME_DEMO.IEntityData, entity: HTMLElement
 
     convertAttributes(data.components).map((item) => {
         entity.setAttribute(item.key, item.value);
+        // entity.flushToDOM();
     });
 
     return entity;

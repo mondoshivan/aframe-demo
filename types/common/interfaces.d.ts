@@ -27,10 +27,15 @@ declare namespace AFRAME_DEMO {
         components: IAttributeObject
     }
 
+    interface IAssetItem {
+        [key: string]: string
+    }
+
     interface IPoolData {
         [key: string]: {
             components: IAttributeObject
             poolSize: number
+            definition: any
         }
     }
 }
