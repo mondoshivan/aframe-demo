@@ -1,16 +1,17 @@
 
-import CubeGLB from "@assets/Flamingo.glb";
+import "aframe-extras"; // required for e.g. animation-mixer: https://github.com/n5ro/aframe-extras
+
+import DataGLB from "@assets/Flamingo.glb";
 
 if (!window.AFRAME_DEMO) window.AFRAME_DEMO = {}
 
-window.AFRAME_DEMO.registerAsset!("cube", CubeGLB);
+window.AFRAME_DEMO.registerAsset!("flamingo", DataGLB);
 
 window.AFRAME_DEMO.registerCube!(
-    "gltf", 
+    "flamingo", 
     {
         components: {
-            color: "pink",
-            "gltf-model": "#cube",
+            "gltf-model": "#flamingo",
             "animation-mixer":  ""
         },
         poolSize: 10,

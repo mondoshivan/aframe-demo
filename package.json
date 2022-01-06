@@ -39,6 +39,7 @@
   "dependencies": {
     "@types/aframe": "^1.0.5",
     "aframe": "^1.2.0",
-    "aframe-extras": "^6.1.1"
+    "aframe-extras": "^6.1.1",
+    "aframe-slice9-component": "^1.0.0"
   }
 }

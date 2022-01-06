@@ -7,10 +7,24 @@
 </head>
 
 <body>
-    <a-scene>
+    <a-scene fog="type: linear; color: #AAA" cursor="rayOrigin: mouse">
         <a-assets>
+            <a-mixin id="text-h1" text="align: center; baseline: bottom; anchor: center; width: 3; font: monoid; color: gold"></a-mixin>
         </a-assets>
-        <a-entity init-cube></a-entity>
+
+        <a-sky color="#aac5f5"></a-sky>
+
+        <!-- <a-entity flamingo></a-entity> -->
+
+        <a-entity id="rig">
+            <a-entity camera="" position="0 1.7 0" wasd-controls="" rotation="" look-controls="">
+                <a-entity id="user-interface" user-interface="width: 5, height: 2; color: #e6ebf0" position="0 0 -2">
+                    <a-text mixin="text-h1" text="value: a-cube" position="0 0.7 0"></a-text>
+                    <a-entity ui-cube position="0 -0.25 1"></a-entity>
+                </a-entity>
+            </a-entity>
+        </a-entity>
+
     </a-scene>
 </body>
 

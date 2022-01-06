@@ -7,6 +7,7 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"],
     alias: {
       "@assets": path.resolve(__dirname, "assets"),
+      "@images": path.resolve(__dirname, "images"),
       "@src": path.resolve(__dirname, "src")
     }
   },
@@ -37,6 +38,13 @@ module.exports = {
         test: /\.tsx?$/,
         use: "ts-loader",
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        loader: 'file-loader',
+        options: {
+          outputPath: 'images/'
+        },
       },
       {
         test: /\.(glb|gltf)$/i,

@@ -28,6 +28,7 @@ export class PoolHelper {
             componentsData[`pool__${id}`] = {
                 size: item.poolSize,
                 mixin: id,
+                dynamic: true
               }
 
             const entityData : AFRAME_DEMO.IEntityData = {
