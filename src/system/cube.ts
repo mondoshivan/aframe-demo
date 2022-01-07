@@ -8,6 +8,7 @@ window.AFRAME_DEMO.CUBES = {}
 
 export interface CubeSystem<T extends object = any>  extends System {
     getCube(name: string): Entity;
+    returnCube(name: string, entity: Entity): void;
 }
 
 AFRAME.registerSystem('cube', {
@@ -18,18 +19,28 @@ AFRAME.registerSystem('cube', {
 
     init: function () {
         const self = this;
-        const sceenEl = this.el;
+        const sceenEl = self.el;
 
-        this.data.activeCubes = [] as Entity[];
-        this.data.poolHelper = new PoolHelper('cube', window.AFRAME_DEMO.CUBES!, sceenEl!);
+        self.data.activeCubes = [] as Entity[];
+        self.data.poolHelper = new PoolHelper('cube', window.AFRAME_DEMO.CUBES!, sceenEl!);
     },
 
     getCube: function (name: string) : Entity {
+        console.log("getting cube");
         const self = this;
-        const cube = this.data.poolHelper.requestEntity(name);
-        this.data.activeCubes.push(cube);
+        const cube = self.data.poolHelper.requestEntity(name);
+        self.data.activeCubes.push(cube);
+        console.log("active cubes:", self.data.activeCubes);
         return cube;
-      }
+    },
+
+    returnCube: function(name: string, entity: Entity) {
+        console.log("returning cube");
+        const self = this;
+        self.data.activeCubes.splice(self.data.activeCubes.indexOf(entity));
+        self.data.poolHelper.returnEntity(name, entity);
+        console.log("active cubes:", self.data.activeCubes);
+    }
 
 });
 

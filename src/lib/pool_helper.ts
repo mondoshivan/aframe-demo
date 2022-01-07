@@ -3,6 +3,7 @@ import { Component, DefaultComponents, Entity, Scene, System } from "aframe";
 
 interface PoolComponent<T extends object = any, S extends System = System> extends Component {
     requestEntity(): Entity
+    returnEntity(entity: Entity): void
 }
 
 export class PoolHelper {
@@ -45,6 +46,13 @@ export class PoolHelper {
         const component = document.querySelector('a-scene').components[poolName] as PoolComponent;
 
         return component.requestEntity();
-      }
+    }
+
+    public returnEntity(name: string, entity: Entity) {
+        const mixinName = this.group + name;
+        const poolName = 'pool__' + mixinName;
+        const component = document.querySelector('a-scene').components[poolName] as PoolComponent;
+        component.returnEntity(entity);
+    }
 
 }

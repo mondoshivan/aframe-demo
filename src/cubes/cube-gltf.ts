@@ -20,5 +20,12 @@ window.AFRAME_DEMO.registerCube!(
         },
 
         tick: function(time: number, delta: number) {
-        }
+        },
+
+        pause: function () {
+            console.log("pausing");
+        },
+        play: function () {
+            console.log("playing");
+        },
     });
