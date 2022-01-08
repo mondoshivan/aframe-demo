@@ -1,6 +1,5 @@
-if (!window.AFRAME_DEMO) window.AFRAME_DEMO = {}
-
-// import "aframe";
+import "aframe";
+import "aframe-extras"; // required for e.g. animation-mixer: https://github.com/n5ro/aframe-extras
 
 // primitives
 // import "@src/primitive/ground";
@@ -18,5 +17,8 @@ if (!window.AFRAME_DEMO) window.AFRAME_DEMO = {}
 // import "@src/cubes/flamingo";
 // import "@src/cubes/cube-gltf";
 
+import "@src/system/asset";
 import "@src/system/sample_system";
+
 import "@src/component/sample_component";
+import "@src/component/flamingo";

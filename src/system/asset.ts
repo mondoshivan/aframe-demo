@@ -1,26 +1,44 @@
-import * as AFRAME from "aframe";
-
+import { BaseSystem, system } from "aframe-typescript-class-components";
+import { Schema } from "aframe";
 import * as Utils from "@src/lib/utils";
 
-if (!window.AFRAME_DEMO) window.AFRAME_DEMO = {}
-window.AFRAME_DEMO.ASSET_ITEMS = {}
+export interface AssetSystemData {
+  enabled: boolean;
+  name: string;
+}
 
-AFRAME.registerSystem('asset', {
+@system("asset")
+export class AssetSystem extends BaseSystem<AssetSystemData> {
 
-    init: function () {
-        Utils.createAssetItems(window.AFRAME_DEMO.ASSET_ITEMS!);
-    }
+  static schema: Schema<AssetSystemData> = {
+    enabled: { type: "boolean", default: true },
+    name: { type: "string", default: "SampleSystem" },
+  };
 
-});
+  /**
+   * Stores the registered assets.
+   */
+  static assets = {} as AFRAME_DEMO.IAssetItem;
 
-window.AFRAME_DEMO.registerAsset = function (id: string, src: string) {
-    if (window.AFRAME_DEMO.ASSET_ITEMS![id]) {
+  /**
+   * Registering a new asset.
+   * @param id 
+   * @param src 
+   */
+  static registerAsset(id: string, src: string) {
+    if (AssetSystem.assets[id]) {
         throw new Error('The asset `' + id + '` has been already registered. ' +
                     'Check that you are not loading two versions of the same entity ' +
                     'or two different entities of the same name.');
     }
 
-    window.AFRAME_DEMO.ASSET_ITEMS![id] = src;
+    AssetSystem.assets[id] = src;
 
     console.info('Asseet registered ', id);
+  }
+
+  init(): void {
+    console.log("AssetSystem initializing");
+    Utils.createAssetItems(AssetSystem.assets);
+  }
 }

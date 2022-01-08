@@ -1,6 +1,6 @@
 import { BaseSystem, system } from "aframe-typescript-class-components";
 
-import { Entity, Schema, THREE } from "aframe";
+import { Schema } from "aframe";
 
 export interface SampleSystemData {
   enabled: boolean;
@@ -15,20 +15,8 @@ export class SampleSystem extends BaseSystem<SampleSystemData> {
     name: { type: "string", default: "SampleSystem" },
   };
 
-  static multiple = true;
-  static dependencies = [];
-
-  greeting!: string;
-  vector = new THREE.Vector3(0, 0, 0);
-
-  events = {};
-
   init(): void {
     console.log("SampleSystem initializing");
-  }
-
-  tick(time: number, deltaTime: number): void {
-
   }
 
   getSomething(): any {

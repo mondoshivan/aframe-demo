@@ -1,28 +1,34 @@
-import * as AFRAME from "aframe";
+import { BaseComponent, component } from "aframe-typescript-class-components";
+import { Schema } from "aframe";
+import DataGLB from "@assets/Flamingo.glb";
+import { AssetSystem } from "@src/system/asset";
 
-import { CubeSystem } from "@src/system/cube";
+// Note: Must be called before the init() method of the AssetSystem runs.
+AssetSystem.registerAsset!("flamingo", DataGLB);
 
-AFRAME.registerComponent('flamingo', {
-    schema: {},
-    init: function () {
-        const el = this.el;
+/**
+ * 
+ */
+export interface FlamingoComponentData {
+  enabled: boolean;
+  name: string;
+}
 
-        el.sceneEl!.addEventListener("loaded", () => {
-            this.data.glb = (el.sceneEl!.systems.cube as CubeSystem).getCube("flamingo");
-            this.data.glb.object3D.position.set(0, 0, -10);
-            this.data.glb.play();
+/**
+ * 
+ */
+@component("flamingo")
+export class FlamingoComponent extends BaseComponent<FlamingoComponentData, AssetSystem> {
 
-            this.data.flamingo = window.AFRAME_DEMO.CUBES!["flamingo"];
-            this.data.flamingo.definition.init.call(this);
-        })
-    },
-    update: function () {},
-    tick: function (time, delta) {
-        this.el.sceneEl!.addEventListener("loaded", () => {
-            this.data.flamingo.definition.tick.call(this, time, delta);
-        });
-    },
-    remove: function () {},
-    pause: function () {},
-    play: function () {}
-  });
+  static schema: Schema<FlamingoComponentData> = {
+    enabled: { type: "boolean", default: true },
+    name: { type: "string", default: "" },
+  };
+
+  init(): void {
+    const el = this.el;
+    el.setAttribute("gltf-model", "#flamingo");
+    el.setAttribute("animation-mixer", "");
+  }
+  
+}
